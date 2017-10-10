@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +36,8 @@ public class FileController {
 
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView uploadFile(@ModelAttribute("uploadedFile") UploadedFile uploadedFile, BindingResult result) {// имена параметров - как на форме jsp
+	public ModelAndView uploadFile(@ModelAttribute("uploadedFile") UploadedFile uploadedFile, BindingResult result,
+			HttpServletRequest request) {// имена параметров - как на форме jsp
 
 		ModelAndView modelAndView = new ModelAndView();
 
@@ -44,16 +47,21 @@ public class FileController {
 		fileValidator.validate(uploadedFile, result);
 
 		if (result.hasErrors()) {
-			modelAndView.setViewName("main");
+			modelAndView.setViewName("index");
 		} else {
 
 			try {
 				byte[] bytes = file.getBytes();
-
+		
 				fileName = file.getOriginalFilename();
 
-				String rootPath = System.getProperty("catalina.home");
-				File dir = new File(rootPath + File.separator + "tmpFiles");
+				String rootPath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+				String rootPath2 = request.getSession().getServletContext().getRealPath("/");
+				//String rootPath3 = System.getProperty("catalina.home");
+				logger.info("path: " + rootPath);
+				logger.info("path2: " + rootPath2);
+						
+				File dir = new File(rootPath2 + "resources"+ File.separator);
 
 				if (!dir.exists()) {
 					dir.mkdirs();
@@ -71,7 +79,7 @@ public class FileController {
 				RedirectView redirectView = new RedirectView("fileuploaded");
 				redirectView.setStatusCode(HttpStatus.FOUND);
 				modelAndView.setView(redirectView);
-				modelAndView.addObject("filename", fileName);
+				modelAndView.addObject("filename", rootPath +"/resources/"+fileName);
 
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

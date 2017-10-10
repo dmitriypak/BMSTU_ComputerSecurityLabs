@@ -9,6 +9,6 @@
 
 	<p>Загружен файл: ${filename}!</p>
 
-
+	<img alt="${filename}" src="${filename}">
 </body>
 </html>
