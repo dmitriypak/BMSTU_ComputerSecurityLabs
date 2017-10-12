@@ -37,7 +37,7 @@ public class FileController {
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView uploadFile(@ModelAttribute("uploadedFile") UploadedFile uploadedFile, BindingResult result,
-			HttpServletRequest request) {// имена параметров - как на форме jsp
+			HttpServletRequest request) {
 
 		ModelAndView modelAndView = new ModelAndView();
 
