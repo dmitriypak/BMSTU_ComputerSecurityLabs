@@ -11,17 +11,15 @@
 </head>
 <body>
 	<div>
-		<form:form method="post"  modelAttribute="originalMessage" action="encryptMessage">
-			<p>Загружен файл: ${filename}!</p>
-			
+		<form:form method="post" modelAttribute="originalMessage" action="encryptMessage">
+			<p>Загружен файл: ${originalFile.getOriginalFilename()}!</p>
 			<p style="font-weight:600";">Шифруемое сообщение</p>
 			<textarea placeholder="" name="originalMessage" rows="5" cols="100"></textarea>
 			<p>Оригинальное изображение</p>
 			<input type="submit" value="Зашифровать" />
 			<p></p>
 			<img alt="${filename}" src="${filename}">
-		
-		
+			<p>${testFile}</p>
 		</form:form>	
 	</div>
 	

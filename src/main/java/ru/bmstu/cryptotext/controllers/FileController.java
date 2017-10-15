@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,13 +28,14 @@ import ru.bmstu.cryptotext.objects.FileValidator;
 
 @Controller
 @SessionAttributes("filename")
+
 public class FileController {
 
 	@Autowired
 	private FileValidator fileValidator;
 
 	private static final Logger logger = LoggerFactory.getLogger(FileController.class);
-
+	private MultipartFile file = null;
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView uploadFile(@ModelAttribute("uploadedFile") UploadedFile uploadedFile, BindingResult result,
@@ -43,7 +45,7 @@ public class FileController {
 
 		String fileName = null;
 
-		MultipartFile file = uploadedFile.getFile();
+		file = uploadedFile.getFile();
 		fileValidator.validate(uploadedFile, result);
 
 		if (result.hasErrors()) {
@@ -79,8 +81,9 @@ public class FileController {
 				RedirectView redirectView = new RedirectView("fileuploaded");
 				redirectView.setStatusCode(HttpStatus.FOUND);
 				modelAndView.setView(redirectView);
-				modelAndView.addObject("filename", rootPath +"/resources/"+fileName);
-
+			
+			    uploadedFile.setPath(rootPath +"/resources/"+fileName);
+			    modelAndView.addObject("filename", rootPath +"/resources/"+fileName);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -96,4 +99,11 @@ public class FileController {
 		return "fileuploaded";
 	}
 
+	
+    @ModelAttribute
+    public void addAttributes(Model model) {
+        model.addAttribute("originalFile", file);
+        
+    }
+    
 }

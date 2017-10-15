@@ -9,18 +9,13 @@
 
 <title>Оригинальное изображение</title>
 
-<style>
-.zoom:hover {
-	zoom: 3;
-}
-</style>
 </head>
 <body>
 	<div ng-app>
 		<form:form method="post" modelAttribute="originalMessage"
 			action="encryptMessage">
-			<p>Загружен файл: ${filename}!</p>
-
+			<p>Загружен файл: ${originalFile.getOriginalFilename()}</p>
+			<p>${testFile}</p>
 			<p style="font-weight: 600";">Зашифрованное сообщение: ${originalMessage}</p>
 			<table id="table-1" width=100%>
 				<tbody>

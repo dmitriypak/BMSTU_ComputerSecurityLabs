@@ -22,16 +22,14 @@ public class EncryptController {
 	public ModelAndView encryptMessage(@ModelAttribute("originalMessage") String originalMessage) {
 		ModelAndView modelAndView = new ModelAndView();
 
-		logger.info("message: " + originalMessage);
+		logger.info("Сообщение: " + originalMessage);
+		
 		modelAndView.setViewName("encryptedmessage");
 		return modelAndView;
 		
 	}
-	
-	
-	
 	@RequestMapping(value = "/encryptedMessage", method = RequestMethod.GET)
 	public String encryptedMessage() {
 		return "encryptedmessage";
-	}
+	}	
 }
