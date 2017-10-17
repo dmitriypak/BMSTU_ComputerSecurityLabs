@@ -35,6 +35,7 @@ public class FileController {
 	private FileValidator fileValidator;
 
 	private static final Logger logger = LoggerFactory.getLogger(FileController.class);
+	private UploadedFile loadedFile = null;
 	private MultipartFile file = null;
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
 	@ResponseBody
@@ -81,9 +82,11 @@ public class FileController {
 				RedirectView redirectView = new RedirectView("fileuploaded");
 				redirectView.setStatusCode(HttpStatus.FOUND);
 				modelAndView.setView(redirectView);
-			
+				
 			    uploadedFile.setPath(rootPath +"/resources/"+fileName);
-			    //modelAndView.addObject("filename", rootPath +"/resources/"+fileName);
+			    loadedFile = uploadedFile;
+			    //modelAndView.addObject("originalFile", file);
+			    modelAndView.addObject("filename", rootPath +"/resources/"+fileName);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -99,11 +102,12 @@ public class FileController {
 		return "fileuploaded";
 	}
 
-	
+
+    
     @ModelAttribute
     public void addAttributes(Model model) {
         model.addAttribute("originalFile", file);
-        
+        model.addAttribute("loadedFile",loadedFile);
     }
     
 }
