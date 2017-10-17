@@ -19,7 +19,7 @@ public class EncryptController {
 	private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 	@RequestMapping(value = "/encryptMessage", method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView encryptMessage(@ModelAttribute("originalMessage") String originalMessage) {
+	public ModelAndView encryptMessage(@ModelAttribute("message") String originalMessage) {
 		ModelAndView modelAndView = new ModelAndView();
 
 		logger.info("Сообщение: " + originalMessage);

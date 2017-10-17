@@ -37,12 +37,12 @@ public class FileController {
 	private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 	private UploadedFile loadedFile = null;
 	private MultipartFile file = null;
+	
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-	@ResponseBody
-	public ModelAndView uploadFile(@ModelAttribute("uploadedFile") UploadedFile uploadedFile, BindingResult result,
-			HttpServletRequest request) {
+	public String uploadFile(@ModelAttribute("uploadedFile") UploadedFile uploadedFile, BindingResult result,
+			HttpServletRequest request, Model model) {
 
-		ModelAndView modelAndView = new ModelAndView();
+		//ModelAndView modelAndView = new ModelAndView();
 
 		String fileName = null;
 
@@ -50,51 +50,48 @@ public class FileController {
 		fileValidator.validate(uploadedFile, result);
 
 		if (result.hasErrors()) {
-			modelAndView.setViewName("index");
-		} else {
-
-			try {
-				byte[] bytes = file.getBytes();
-		
-				fileName = file.getOriginalFilename();
-
-				String rootPath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
-				String rootPath2 = request.getSession().getServletContext().getRealPath("/");
-				//String rootPath3 = System.getProperty("catalina.home");
-				logger.info("path: " + rootPath);
-				logger.info("path2: " + rootPath2);
-						
-				File dir = new File(rootPath2 + "resources"+ File.separator);
-
-				if (!dir.exists()) {
-					dir.mkdirs();
-				}
-
-				File loadFile = new File(dir.getAbsolutePath() + File.separator + fileName);
-
-				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(loadFile));
-				stream.write(bytes);
-				stream.flush();
-				stream.close();
-
-				logger.info("uploaded: " + loadFile.getAbsolutePath());
-
-				RedirectView redirectView = new RedirectView("fileuploaded");
-				redirectView.setStatusCode(HttpStatus.FOUND);
-				modelAndView.setView(redirectView);
-				
-			    uploadedFile.setPath(rootPath +"/resources/"+fileName);
-			    loadedFile = uploadedFile;
-			    //modelAndView.addObject("originalFile", file);
-			    modelAndView.addObject("filename", rootPath +"/resources/"+fileName);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
+			return "index";
 		}
 
-		return modelAndView;
+		try {
+			byte[] bytes = file.getBytes();
+	
+			fileName = file.getOriginalFilename();
+
+			String rootPath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+			String rootPath2 = request.getSession().getServletContext().getRealPath("/");
+			//String rootPath3 = System.getProperty("catalina.home");
+			logger.info("path: " + rootPath);
+			logger.info("path2: " + rootPath2);
+					
+			File dir = new File(rootPath2 + "resources"+ File.separator);
+
+			if (!dir.exists()) {
+				dir.mkdirs();
+			}
+
+			File loadFile = new File(dir.getAbsolutePath() + File.separator + fileName);
+
+			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(loadFile));
+			stream.write(bytes);
+			stream.flush();
+			stream.close();
+
+			logger.info("uploaded: " + loadFile.getAbsolutePath());
+
+		    uploadedFile.setPath(rootPath +"/resources/"+fileName);
+		    loadedFile = uploadedFile;
+		    model.addAttribute("originalFile", file);
+		    model.addAttribute("uploadedFile", uploadedFile);
+		    //modelAndView.addObject("filename", rootPath +"/resources/"+fileName);
+		    
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+			
+	
+
+		return "fileuploaded";
 	}
 
 	@RequestMapping(value = "/fileuploaded", method = RequestMethod.GET)
@@ -102,12 +99,5 @@ public class FileController {
 		return "fileuploaded";
 	}
 
-
-    
-    @ModelAttribute
-    public void addAttributes(Model model) {
-        model.addAttribute("originalFile", file);
-        model.addAttribute("loadedFile",loadedFile);
-    }
     
 }
