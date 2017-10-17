@@ -83,7 +83,7 @@ public class FileController {
 				modelAndView.setView(redirectView);
 			
 			    uploadedFile.setPath(rootPath +"/resources/"+fileName);
-			    modelAndView.addObject("filename", rootPath +"/resources/"+fileName);
+			    //modelAndView.addObject("filename", rootPath +"/resources/"+fileName);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
