@@ -12,11 +12,9 @@
 </head>
 <body>
 	<div ng-app>
-		<form:form method="post" modelAttribute="originalMessage"
-			action="encryptMessage">
+		<form:form method="post" modelAttribute="originalMessage" action="encryptMessage">
 			<p>Загружен файл: ${originalFile.getOriginalFilename()}</p>
-			<p>${testFile}</p>
-			<p style="font-weight: 600";">Зашифрованное сообщение: ${originalMessage}</p>
+			<p style="font-weight: 600";">Зашифрованное сообщение: ${uploadedFile.message}</p>
 			<table id="table-1" width=100%>
 				<tbody>
 					<tr>
@@ -24,8 +22,8 @@
 						<td>С зашифрованным текстом</td>
 					</tr>
 					</tr>
-					<td><img width=100% alt="${filename}" src="${filename}" style=""></td>
-					<td><img width=100% alt="${filename}" src="${filename}"style=""></td>
+					<td><img width=100% alt="${filename}" src="${uploadedFile.getPath()}" style=""></td>
+					<td><img width=100% alt="${filename}" src="${uploadedFile.getPath()}"style=""></td>
 					</tr>
 
 				</tbody>

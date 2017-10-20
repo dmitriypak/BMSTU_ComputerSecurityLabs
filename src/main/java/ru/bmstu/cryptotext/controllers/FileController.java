@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import ru.bmstu.cryptotext.objects.UploadedFile;
@@ -40,7 +41,7 @@ public class FileController {
 	
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
 	public String uploadFile(@ModelAttribute("uploadedFile") UploadedFile uploadedFile, BindingResult result,
-			HttpServletRequest request, Model model) {
+			HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
 
 		//ModelAndView modelAndView = new ModelAndView();
 
@@ -84,7 +85,7 @@ public class FileController {
 		    model.addAttribute("originalFile", file);
 		    model.addAttribute("uploadedFile", uploadedFile);
 		    //modelAndView.addObject("filename", rootPath +"/resources/"+fileName);
-		    
+		    redirectAttributes.addFlashAttribute("uploadedFile", uploadedFile);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -98,6 +99,6 @@ public class FileController {
 	public String fileUploaded() {
 		return "fileuploaded";
 	}
-
+	
     
 }
