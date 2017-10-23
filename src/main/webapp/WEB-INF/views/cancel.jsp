@@ -10,17 +10,6 @@
 	rel="stylesheet"></link>
 </head>
 <body>
-	<form:form method="POST" enctype="multipart/form-data"
-		modelAttribute="file">
-		<fieldset>
-			<input type="file" name="file" path="file" />
-		</fieldset>
-		<footer>
-			<input class="btn btn-success" type="submit" value="Загрузить" name="_eventId_upload" />		
-		</footer>
-		
-	</form:form>
-
-	<%-- <P>  The time on the server is ${serverTime}. </P> --%>
+	<P>  Canceled</P> 
 </body>
 </html>
