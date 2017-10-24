@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div>
-test test
+		<img alt="${file.getPath()}" src="${file.getPath()}">
 		
 	</div>
 	
