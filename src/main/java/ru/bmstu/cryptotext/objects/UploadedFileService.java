@@ -42,10 +42,15 @@ public class UploadedFileService {
 			String rootPath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
 			String rootPath2 = request.getSession().getServletContext().getRealPath("/");
 			String fileName =uploadedFile.getOriginalFilename();
-			file.setPath(rootPath +"/resources/"+fileName);
-			createNewFile(rootPath2,file.getFile());
-			//file.setFile(createNewFile(rootPath2,file.getFile()));
+			String dir = rootPath +"/resources/";
 			
+			file.setPath(dir+fileName);
+			createNewFile(rootPath2,uploadedFile);
+			
+			file.setFile(uploadedFile);
+			file.setFileName(fileName);
+			file.setDir(dir);
+			file.setAbsolutePath(rootPath2+ "resources"+ File.separator+fileName);
 			
 			System.out.println("$$$ полученные параметры " + rootPath);
 			System.out.println(rootPath2);

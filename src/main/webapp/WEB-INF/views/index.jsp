@@ -10,8 +10,7 @@
 	rel="stylesheet"></link>
 </head>
 <body>
-	<form:form method="POST" enctype="multipart/form-data"
-		modelAttribute="file">
+	<form:form method="POST" enctype="multipart/form-data" modelAttribute="file">
 		<fieldset>
 			<input type="file" name="file" path="file" />
 		</fieldset>

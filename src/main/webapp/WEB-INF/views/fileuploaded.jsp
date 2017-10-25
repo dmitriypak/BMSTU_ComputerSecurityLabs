@@ -11,14 +11,15 @@
 </head>
 <body>
 	<div>
-		<p>Загружен файл: ${file.getFile().getOriginalFilename()}!</p>
-		<p style="font-weight:600";">Шифруемое сообщение</p>
-		<textarea placeholder="" name="message" rows="5" cols="100"></textarea>
-		<p>Оригинальное изображение</p>
-		<input type="submit" value="Зашифровать" />
-		<p></p>
-		<img alt="${file.getPath()}" src="${file.getPath()} ">
-		
+		<form:form method="post" modelAttribute="file">
+			<p>Загружен файл: ${file.getFile().getOriginalFilename()}!</p>
+			<p style="font-weight:600";">Шифруемое сообщение</p>
+			<textarea placeholder="Введите сообщение..." name="message" rows="5" cols="100"></textarea>
+			<p>Оригинальное изображение</p>
+			<input type="submit" value="Зашифровать" name="_eventId_encryptMessage"/>
+			<p></p>
+			<img alt="${file.getPath()}" src="${file.getPath()} ">
+		</form:form>
 
 		
 	</div>

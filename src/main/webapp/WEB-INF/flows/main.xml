@@ -14,11 +14,22 @@
 	<action-state id="actionFileUploaded" >
 		<evaluate expression="uploadedFileService.checkFile(file,flowRequestContext)"/>
 		<transition on="success" to="mainContent"/>
-		<transition on="failed" to="index"/>
+		<transition on="failed" to="index"/>	
 	</action-state>
-
-
- 	<view-state id="mainContent" view="fileuploaded"/>
+		
+	
+ 	<view-state id="mainContent" view="fileuploaded" model="file">
+ 		<transition on="encryptMessage" to="actionEncryptMessage"/>
+ 	</view-state>
+ 	
+ 		
+	<action-state id="actionEncryptMessage">
+		<evaluate expression="encryptMessageService.encryptMessage(file,flowRequestContext)"/>
+		<transition on="success" to="complete"/>
+	</action-state>	
+ 	
+	<view-state id="complete" view="encryptedimage" model="file">
+	</view-state>
 	
 	<end-state id="cancel" view="cancel"></end-state>
 

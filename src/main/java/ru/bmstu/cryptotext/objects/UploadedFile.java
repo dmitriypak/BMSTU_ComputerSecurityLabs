@@ -9,7 +9,10 @@ public class UploadedFile implements Serializable {
 	private static final long serialVersionUID = 7730377931313245319L;
 	private transient MultipartFile file;
 	private String message;
+	private String fileName;
 	private String path;
+	private String dir;
+	private String absolutePath;
 
 //	private byte[] fileContent;
 //
@@ -47,6 +50,30 @@ public class UploadedFile implements Serializable {
 
 	public void setPath(String path) {
 		this.path = path;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public String getDir() {
+		return dir;
+	}
+
+	public void setDir(String dir) {
+		this.dir = dir;
+	}
+
+	public String getAbsolutePath() {
+		return absolutePath;
+	}
+
+	public void setAbsolutePath(String absolutePath) {
+		this.absolutePath = absolutePath;
 	}
 
 	
