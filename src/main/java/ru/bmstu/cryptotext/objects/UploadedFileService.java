@@ -50,7 +50,7 @@ public class UploadedFileService {
 			file.setFile(uploadedFile);
 			file.setFileName(fileName);
 			file.setDir(dir);
-			file.setAbsolutePath(rootPath2+ "resources"+ File.separator+fileName);
+			file.setAbsolutePath(rootPath2+ "resources"+ File.separator);
 			
 			System.out.println("$$$ полученные параметры " + rootPath);
 			System.out.println(rootPath2);
