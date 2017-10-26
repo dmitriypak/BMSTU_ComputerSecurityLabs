@@ -15,6 +15,9 @@ import org.springframework.webflow.execution.RequestContext;
 
 @Component
 public class EncryptMessageService {
+	
+	private static final int MAX_INT_LEN = 4;
+	
 	public ModelAndView encryptMessage(UploadedFile file, RequestContext context) {
 		ModelAndView mvn = new ModelAndView();
 		
@@ -28,6 +31,31 @@ public class EncryptMessageService {
 		return mvn;
 	}
 	
+	private static byte[] intToBytes(int i)
+	{
+	 byte[] integerBs = new byte[MAX_INT_LEN];
+	 integerBs[0] = (byte) ((i >>> 24) & 0xFF);
+	 integerBs[1] = (byte) ((i >>> 16) & 0xFF);
+	 integerBs[2] = (byte) ((i >>> 8) & 0xFF);
+	 integerBs[3] = (byte) (i & 0xFF);
+	 return integerBs;
+	} 
+
+	
+	private static byte[] getMessageBytes(String inputText)
+	{
+	 // convert data to byte arrays
+	 byte[] msgBytes = inputText.getBytes();
+	 byte[] lenBs = intToBytes(msgBytes.length);
+	 int totalLen = lenBs.length + msgBytes.length;
+	 byte[] stego = new byte[totalLen]; // for holding resulting stego
+	 // combine the two fields into one byte array
+	 System.arraycopy(lenBs, 0, stego, 0, lenBs.length);
+	 // length of binary message
+	 System.arraycopy(msgBytes, 0, stego, lenBs.length,msgBytes.length);
+	 // binary message
+	 return stego;
+	} // en
 	
 	private File createEncryptedImage(UploadedFile file) {
 		File originalFile = null;
@@ -56,13 +84,6 @@ public class EncryptMessageService {
 
 	    System.out.println("File is copied successful!");
 
-	        
-//			byte[] bytes = file.getPath().getBytes();
-//			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(encryptedFile));
-//			stream.write(bytes);
-//			stream.flush();
-//			stream.close();
-			
 		}catch(IOException ex) {
 			ex.printStackTrace();
 			return null;
