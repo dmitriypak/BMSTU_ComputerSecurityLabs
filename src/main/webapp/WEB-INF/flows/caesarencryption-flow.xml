@@ -5,35 +5,19 @@
         http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
 	start-state="caesarencryption">
 	
-	<var name="file" class="ru.bmstu.cryptotext.objects.UploadedFile"/>
+	<var name="message" class="ru.bmstu.cryptotext.objects.EncryptedMessage"/>
 	
-	<view-state id="caesarencryption" view="caesarencryption" model="file">
-		<transition on="upload" to="actionFileUploaded" />
+	<view-state id="caesarencryption" view="caesarencryption" model="message">
+		<transition on="encrypt" to="actionEncryptMessage" />
 	</view-state>
 
-	<action-state id="actionFileUploaded" >
-		<evaluate expression="uploadedFileService.checkFile(file,flowRequestContext)"/>
-		<transition on="success" to="mainContent"/>
+	<action-state id="actionEncryptMessage" >
+		<evaluate expression="encryptedMessageService.encryptMessage(message,flowRequestContext)"/>
+		<transition on="success" to="caesarencryption"/>
 		<transition on="failed" to="index"/>	
 	</action-state>
 		
-	
- 	<view-state id="mainContent" view="fileuploaded" model="file">
- 		<transition on="encryptMessage" to="actionEncryptMessage"/>
- 	</view-state>
- 	
- 		
-	<action-state id="actionEncryptMessage">
-		<evaluate expression="encryptMessageService.encryptMessage(file,flowRequestContext)"/>
-		<transition on="success" to="complete"/>
-	</action-state>	
- 	
-	<view-state id="complete" view="encryptedimage" model="file">
-	</view-state>
-	
+
 	<end-state id="cancel" view="cancel"></end-state>
-
-
-
 
 </flow>
