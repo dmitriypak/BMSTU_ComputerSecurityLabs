@@ -3,11 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow
         http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
-	start-state="index">
+	start-state="lsbencryption">
 	
 	<var name="file" class="ru.bmstu.cryptotext.objects.UploadedFile"/>
 	
-	<view-state id="index" view="index" model="file">
+	<view-state id="lsbencryption" view="lsbencryption" model="file">
 		<transition on="upload" to="actionFileUploaded" />
 	</view-state>
 

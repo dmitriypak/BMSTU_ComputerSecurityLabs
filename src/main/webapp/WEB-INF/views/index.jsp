@@ -5,21 +5,24 @@
 <%@ page session="false"%>
 <html>
 <head>
-<title>Home</title>
+<title>Лабораторные работы по Компьютерной безопасности</title>
 <link href="<c:url value='/resources/css/bootstrap.css' />"
 	rel="stylesheet"></link>
 </head>
 <body>
-	<form:form method="POST" enctype="multipart/form-data" modelAttribute="file">
-		<fieldset>
-			<input type="file" name="file" path="file" />
-		</fieldset>
-		<footer>
-			<input class="btn btn-success" type="submit" value="Загрузить" name="_eventId_upload" />		
-		</footer>
-		
-	</form:form>
+	<div class="jumbotron jumbotron-fluid">
+		<div class="container">
+			<h2 class="display-3">Компьютерная безопасность</h2>
+			<p class="lead">Лабораторные работы Пак Д.В. ВИУ7-88</p>
+		</div>
+	</div>
 
-	<%-- <P>  The time on the server is ${serverTime}. </P> --%>
+	<div class="list-group">
+		<a href="${flowExecutionUrl}&_eventId=caesarencryptionPage"
+			class="list-group-item list-group-item-action">Лабораторная	работа №1. Шифр Цезаря </a> 
+		<a	href="${flowExecutionUrl}&_eventId=lsbencryptionPage"
+			class="list-group-item list-group-item-action">Лабораторная	работа №2(ч.1). Стеганография в графических файлах. Шифрофание	сообщения.</a>
+	</div>
+
 </body>
 </html>

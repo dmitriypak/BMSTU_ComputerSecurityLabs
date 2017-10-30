@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+	start-state="index">
+	
+	<view-state id="index" view="index">
+		<transition on="caesarencryptionPage" to="actionCaesarencryption" />
+		<transition on="lsbencryptionPage" to="actionLsbencryption" />
+	</view-state>
+
+
+	<subflow-state id="actionCaesarencryption" subflow="caesarencryption"/>
+	<subflow-state id="actionLsbencryption" subflow="lsbencryption"/>
+	
+<!-- 	<view-state id="lsbencryption" view="lsbencryption">
+		<transition on="lsbencryptionPage" to="index" />
+	</view-state> -->
+	
+	<end-state id="cancel" view="cancel"></end-state>
+</flow>

@@ -23,9 +23,22 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String index(Locale locale) {
 
 		return "redirect:index";
 	}
+	
+	@RequestMapping(value = "/caesarencryption", method = RequestMethod.GET)
+	public String caesarencryption (Locale locale) {
+
+		return "redirect:caesarencryption";
+	}
+	
+	@RequestMapping(value = "/lsbencryption", method = RequestMethod.GET)
+	public String lsbencryption (Locale locale) {
+
+		return "redirect:lsbencryption";
+	}	
+	
 	
 }
