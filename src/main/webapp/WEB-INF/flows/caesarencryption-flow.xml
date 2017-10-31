@@ -8,15 +8,25 @@
 	<var name="message" class="ru.bmstu.cryptotext.objects.EncryptedMessage"/>
 	
 	<view-state id="caesarencryption" view="caesarencryption" model="message">
-		<transition on="encrypt" to="actionEncryptMessage" />
+		<transition on="encryptLeft" to="actionEncryptMessageLeft" />
+		<transition on="encryptRight" to="actionEncryptMessageRight" />
 	</view-state>
 
-	<action-state id="actionEncryptMessage" >
-		<evaluate expression="encryptedMessageService.encryptMessage(message,flowRequestContext)"/>
+	<action-state id="actionEncryptMessageLeft" >
+		<evaluate expression="encryptedMessageService.encryptMessageLeft(message,flowRequestContext)"/>
 		<transition on="success" to="caesarencryption"/>
 		<transition on="failed" to="index"/>	
 	</action-state>
 		
+
+	<action-state id="actionEncryptMessageRight" >
+		<evaluate expression="encryptedMessageService.encryptMessageRight(message,flowRequestContext)"/>
+		<transition on="success" to="caesarencryption"/>
+		<transition on="failed" to="index"/>	
+	</action-state>
+		
+
+
 
 	<end-state id="cancel" view="cancel"></end-state>
 
