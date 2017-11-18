@@ -8,12 +8,13 @@
 	<view-state id="index" view="index">
 		<transition on="caesarencryptionPage" to="actionCaesarencryption" />
 		<transition on="lsbencryptionPage" to="actionLsbencryption" />
+		<transition on="lsbdecryptionPage" to="actionLsbdecryption" />
 	</view-state>
 
 
 	<subflow-state id="actionCaesarencryption" subflow="caesarencryption"/>
 	<subflow-state id="actionLsbencryption" subflow="lsbencryption"/>
-	
+	<subflow-state id="actionLsbdecryption" subflow="lsbdecryption"/>
 <!-- 	<view-state id="lsbencryption" view="lsbencryption">
 		<transition on="lsbencryptionPage" to="index" />
 	</view-state> -->

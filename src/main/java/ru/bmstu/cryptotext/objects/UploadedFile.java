@@ -1,5 +1,7 @@
 package ru.bmstu.cryptotext.objects;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 
@@ -13,22 +15,12 @@ public class UploadedFile implements Serializable {
 	private String path;
 	private String dir;
 	private String absolutePath;
-
-//	private byte[] fileContent;
-//
-//	public byte[] getFileContent() {
-//		return fileContent;
-//	}
-
-//	public void setFile(MultipartFile file) {
-//		try {
-//			this.fileContent = file.getBytes();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}	
-	
-	
+	private File sourceFile;
+	private int width;
+	private int height;
+	private byte bitCount;
+	private File encryptedFile;
+	private String encryptedFilePath;
 	
 	public MultipartFile getFile() {
 		return file;
@@ -75,6 +67,55 @@ public class UploadedFile implements Serializable {
 	public void setAbsolutePath(String absolutePath) {
 		this.absolutePath = absolutePath;
 	}
+
+	public File getSourceFile() {
+		return sourceFile;
+	}
+
+	public void setSourceFile(File sourceFile) {
+		this.sourceFile = sourceFile;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public byte getBitCount() {
+		return bitCount;
+	}
+
+	public void setBitCount(byte bitCount) {
+		this.bitCount = bitCount;
+	}
+
+	public File getEncryptedFile() {
+		return encryptedFile;
+	}
+
+	public void setEncryptedFile(File encryptedFile) {
+		this.encryptedFile = encryptedFile;
+	}
+
+	public String getEncryptedFilePath() {
+		return encryptedFilePath;
+	}
+
+	public void setEncryptedFilePath(String encryptedFilePath) {
+		this.encryptedFilePath = encryptedFilePath;
+	}
+
 
 	
 }

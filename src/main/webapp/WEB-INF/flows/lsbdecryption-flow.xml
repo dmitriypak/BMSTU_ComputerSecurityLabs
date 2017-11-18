@@ -3,11 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow
         http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
-	start-state="lsbencryption">
+	start-state="lsbdecryption">
 	
 	<var name="file" class="ru.bmstu.cryptotext.objects.UploadedFile"/>
 	
-	<view-state id="lsbencryption" view="lsbencryption" model="file">
+	<view-state id="lsbdecryption" view="lsbencryption" model="file">
 		<transition on="upload" to="actionFileUploaded" />
 	</view-state>
 
@@ -18,17 +18,17 @@
 	</action-state>
 		
 	
- 	<view-state id="mainContent" view="fileuploaded" model="file">
- 		<transition on="encryptMessage" to="actionEncryptMessage"/>
+ 	<view-state id="mainContent" view="decryptfileuploaded" model="file">
+ 		<transition on="decryptMessage" to="actionDecryptMessage"/>
  	</view-state>
  	
  		
-	<action-state id="actionEncryptMessage">
-		<evaluate expression="encryptedTextToImageService.encryptTextToImage(file,flowRequestContext)"/>
+	<action-state id="actionDecryptMessage">
+		<evaluate expression="decryptedTextToImageService.decryptTextToImage(file,flowRequestContext)"/>
 		<transition on="success" to="complete"/>
 	</action-state>	
  	
-	<view-state id="complete" view="encryptedimage" model="file">
+	<view-state id="complete" view="decryptedimage" model="file">
 	</view-state>
 	
 	<end-state id="cancel" view="cancel"></end-state>

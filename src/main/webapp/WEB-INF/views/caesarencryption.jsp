@@ -17,7 +17,7 @@
 				<form:textarea path="message" id="message" rows="5" cols="100" />
 				<p style="font-weight: bold;margin-left: 0px">Сдвиг:</p>
 				<input class="btn btn-success" type="submit" value="&larr;Зашифровать" name="_eventId_encryptLeft" />	
-				<form:input path="shift" id="shift" value = "3" size="5"></form:input>
+				<form:input path="shift" id="shift" size="5"></form:input>
 				
 				<input class="btn btn-success" type="submit" value="Зашифровать&rarr;" name="_eventId_encryptRight" />		
 				<p style="font-weight: bold;margin-left: 0px">Кол-во сдвигов:</p>			

@@ -7,18 +7,13 @@
 
 <head>
 
-<title>Оригинальное изображение</title>
+<title>Загруженное изображение</title>
 </head>
 <body>
 	<div>
 		<form:form method="post" modelAttribute="file">
 			<h3>Загружен файл: ${file.getSourceFile().getName()}!</h3>
-			<p style="font-weight:600";">Шифруемое сообщение</p>
-			<textarea placeholder="Введите сообщение..." name="message" rows="5" cols="100"></textarea>
-			<p>Оригинальное изображение</p>
-			
-			Кол-во бит на пиксель: <form:input path="bitCount" id="bitcount" size="5" value = "1"></form:input>
-			<input type="submit" value="Зашифровать" name="_eventId_encryptMessage"/>
+			<input type="submit" value="Расшифровать" name="_eventId_decryptMessage"/>
 			
 			<p><img alt="${file.getPath()}" src="${file.getPath()} "></p>
 		</form:form>

@@ -21,7 +21,9 @@
 		<a href="${flowExecutionUrl}&_eventId=caesarencryptionPage"
 			class="list-group-item list-group-item-action">Лабораторная	работа №1. Шифр Цезаря </a> 
 		<a	href="${flowExecutionUrl}&_eventId=lsbencryptionPage"
-			class="list-group-item list-group-item-action">Лабораторная	работа №2(ч.1). Стеганография в графических файлах. Шифрофание	сообщения.</a>
+			class="list-group-item list-group-item-action">Лабораторная	работа №2. Стеганография в графических файлах. Шифрофание	сообщения.</a>
+		<a	href="${flowExecutionUrl}&_eventId=lsbdecryptionPage"
+			class="list-group-item list-group-item-action">Лабораторная	работа №3. Расшифровка сообщения в изображении.</a>
 	</div>
 
 </body>

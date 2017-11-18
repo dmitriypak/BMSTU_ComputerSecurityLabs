@@ -11,6 +11,7 @@
 </head>
 <body>
 	<form:form method="POST" enctype="multipart/form-data" modelAttribute="file">
+		<h3>Загрузите изображение</h3>
 		<fieldset>
 			<input type="file" name="file" path="file" />
 		</fieldset>

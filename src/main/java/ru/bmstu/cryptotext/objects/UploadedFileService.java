@@ -43,10 +43,10 @@ public class UploadedFileService {
 			String rootPath2 = request.getSession().getServletContext().getRealPath("/");
 			String fileName =uploadedFile.getOriginalFilename();
 			String dir = rootPath +"/resources/";
-			
+	
 			file.setPath(dir+fileName);
-			createNewFile(rootPath2,uploadedFile);
-			
+			File sourceFile = createNewFile(rootPath2,uploadedFile);
+			file.setSourceFile(sourceFile);
 			file.setFile(uploadedFile);
 			file.setFileName(fileName);
 			file.setDir(dir);
@@ -62,15 +62,15 @@ public class UploadedFileService {
 		}
 
 	}
-	private File createNewFile(String path, MultipartFile file) {
+	private File createNewFile(String path, MultipartFile mfile) {
 		File newFile = null;
 		try {
 			File dir = new File(path + "resources"+ File.separator);
 			if (!dir.exists()) {
 				dir.mkdirs();
 			}
-			newFile = new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
-			byte[] bytes = file.getBytes();
+			newFile = new File(dir.getAbsolutePath() + File.separator + mfile.getOriginalFilename());
+			byte[] bytes = mfile.getBytes();
 			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(newFile));
 			stream.write(bytes);
 			stream.flush();
